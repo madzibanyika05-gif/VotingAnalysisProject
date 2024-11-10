@@ -9,3 +9,4 @@ print("Option Number\tOption")
 optionNumber = 0
 for option in options:
     print(optionNumber, "\t", option)
+    optionNumber += 1
