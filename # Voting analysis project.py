@@ -32,7 +32,7 @@ for p in parties:
     mpCount.append(0)
 #mpCount = [0,0,0,0,0,0]
 #getting constituency data from csv file aka reading the csv file
-with open('Documents/GitHub/VotingAnalysisProject/EditedData.csv', newline='') as csvfile:
+with open('Documents/GitHub/VotingAnalysisProject/edited.data.csv', newline='') as csvfile:
 
 
     reader = csv.DictReader(csvfile)
