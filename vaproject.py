@@ -1,11 +1,12 @@
 import csv
+import matplotlib.pyplot as plt  # Importing Matplotlib for plotting
 
 class Constituency:
     def __init__(self, t):
         self.details = t
 
     def __str__(self):
-        return self.details['CName'] + " - " + self.details['Party'] + " (" + self.details['RName'] + ")"
+        return f"{self.details['CName']} - {self.details['Party']} ({self.details['RName']})"
 
     def GetCountry(self):
         return self.details['Country']
@@ -22,6 +23,38 @@ class Constituency:
 
     def GetNonVoterPercentage(self):
         return 100 - self.GetVoterTurnout()
+
+
+def calculate_valid_votes_per_party(constituencies):
+    party_votes = {}
+
+    # Calculate the total valid votes per party
+    for con in constituencies:
+        party = con.details['Party']
+        valid_votes = int(con.details.get('Valid votes', 0))
+
+        if party in party_votes:
+            party_votes[party] += valid_votes
+        else:
+            party_votes[party] = valid_votes
+
+    # Display the results
+    print("Valid Votes per Party:")
+    for party, votes in party_votes.items():
+        print(f"{party}: {votes}")
+
+    # Ask the user if they want to display this data as a bar chart
+    show_chart = input("Would you like to display this data as a bar chart? (Y/N): ").strip().upper()
+    if show_chart == 'Y':
+        # Create a bar chart
+        plt.bar(party_votes.keys(), party_votes.values())
+        plt.xlabel('Parties')
+        plt.ylabel('Valid Votes')
+        plt.title('Valid Votes per Party')
+        plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+        plt.tight_layout()  # Adjust layout to make room for labels
+        plt.show()
+
 
 def analyze_voter_turnout(constituencies):
     total_turnout = 0
@@ -42,8 +75,9 @@ def analyze_voter_turnout(constituencies):
         print(f"Average Voter Turnout: {total_turnout / num_constituencies:.2f}%")
         print(f"Average Non-Voter Percentage: {total_non_voters / num_constituencies:.2f}%")
 
+
 options = [
-    "Analyse the percentage of voters who voted and didn't vote",
+    "Calculate the number of valid votes per party",
     "List by constituency",
     "Analyse percentage by gender",
     "List the MPS",
@@ -54,7 +88,6 @@ options = [
 
 constituencies = []
 parties = ["Lab", "Con", "LD", "RUK", "Green", "IND", "SNP", "PC", "DUP", "SF", "SDLP", "UUP", "APNI"]
-mpCount = [0] * len(parties)
 
 with open('Documents/GitHub/VotingAnalysisProject/edited.data.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
@@ -82,9 +115,9 @@ while True:
 
     choice = input("Enter the option number: ")
 
-    # Process the choice
+    # Manage the choices
     if choice == '1':
-        analyze_voter_turnout(constituencies)
+        calculate_valid_votes_per_party(constituencies)  # This should work correctly
         last_action = '1'
     elif choice == '2':
         for con in constituencies:
@@ -94,10 +127,7 @@ while True:
         # Implement gender analysis here if needed
         last_action = '3'
     elif choice == '4':
-        counter1 = 0
-        for party in parties:
-            print(party, " got ", mpCount[counter1], " mps")
-            counter1 += 1
+        # You might want to implement a counting of MPS here
         last_action = '4'
     elif choice == '5':
         print("List of Parties:", parties)
@@ -139,9 +169,9 @@ while True:
         if retry_or_menu == 'M':
             continue  # Loop restarts for the main menu
         elif retry_or_menu == 'Y':
-            # Based on the last valid action, repeat that action
+            # Re-executing the last action based on last valid choice
             if last_action == '1':
-                analyze_voter_turnout(constituencies)
+                calculate_valid_votes_per_party(constituencies)
             elif last_action == '2':
                 for con in constituencies:
                     print(con)
@@ -149,10 +179,8 @@ while True:
                 # Implement gender analysis here if needed
                 pass
             elif last_action == '4':
-                counter1 = 0
-                for party in parties:
-                    print(party, " got ", mpCount[counter1], " mps")
-                    counter1 += 1
+                # You might want to implement a counting of MP's here
+                pass
             elif last_action == '5':
                 print("List of Parties:", parties)
             elif last_action == '6':
