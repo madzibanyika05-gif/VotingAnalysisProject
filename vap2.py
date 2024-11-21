@@ -56,7 +56,7 @@ constituencies = []
 parties = ["Lab", "Con", "LD", "RUK", "Green", "IND", "SNP", "PC", "DUP", "SF", "SDLP", "UUP", "APNI"]
 mpCount = [0] * len(parties)
 
-with open('Documents/GitHub/VotingAnalysisProject/edited.data.csv', newline='') as csvfile:
+with open('Documents/GitHub/VotingAnalysisProject/EditedData.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         constituency = {
