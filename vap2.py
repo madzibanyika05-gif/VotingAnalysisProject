@@ -18,7 +18,7 @@ class Constituency:
         return int(self.details.get('Valid votes', 0))
 
     def GetMemberGender(self):
-        return self.details.get('Member gender', 'Unknown')
+        return self.details.get('Member gender', 'Unknown') # This first part from Peters code
 # Methods allow us to access specific details of a constituency
 
 def analyze_valid_voters_per_party(constituencies):
@@ -55,27 +55,27 @@ def calculate_gender_percentages(constituencies):
         print(f"Male Members: {total_male} ({male_percentage:.2f}%)")
         print(f"Female Members: {total_female} ({female_percentage:.2f}%)")
     else:
-        print("No member data available to calculate percentages.")
+        print("No member data available to calculate percentages.") # Got help from a year 3 with % calculation function and calling it later on
 
 def list_mps_per_party(constituencies):
     """Function to count and display the number of MPs for each party."""
-    mp_count_dict = {party: 0 for party in parties}  # Initialize party counts
+    mp_count_dict = {party: 0 for party in parties}
 
     for con in constituencies:
         party = con.details['Party']
         if party in mp_count_dict:
-            mp_count_dict[party] += 1  # Increment count for that party
+            mp_count_dict[party] += 1  # Function to add number of MPs for each party
 
     # Print the number of MPs for each party
     print("\nNumber of MPs in each party:")
     for party, count in mp_count_dict.items():
-        print(f"{party}: {count} MPs")
+        print(f"{party}: {count} MPs") # Got help from Mrs Zakai and a year 3 student with this function and mpCount list as well as calling it later on
 
 options = [
     "Analyse the number of valid voters per party",
     "List by constituency",
     "Calculate % of Male and Female Members",
-    "List the number of MPs per party",  # Updated description
+    "List the MPs",
     "List the parties",
     "List constituencies by region",
     "List constituency details",
@@ -85,12 +85,12 @@ options = [
 
 constituencies = []
 parties = ["Lab", "Con", "LD", "RUK", "Green", "IND", "SNP", "PC", "DUP", "SF", "SDLP", "UUP", "APNI"]
-mpCount = [0] * len(parties)
+mpCount = [0] * len(parties) # This is from petters code, but added functions inbetween and option list
 
 # Update the file path as necessary
 with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/EditedData.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
-    for row in reader:
+    for row in reader: # help with opening csv also from peters code
         constituency = {
             'CName': row['Constituency name'],
             'RName': row['Region name'],
@@ -105,7 +105,7 @@ with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/Edit
         constituencies.append(con)
 # CSV is read and extracts into a rows 
 
-print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. To terminate software, return to the main menu and choose option 8. Have fun!🤗")
+print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. To terminate software, return to the main menu and choose option 8. Have fun!")
 input("Please press the enter key on your device to continue...")
 # Welcome message and user input to continue
 
@@ -130,7 +130,7 @@ while True:
         calculate_gender_percentages(constituencies)
         last_action = '3'
     elif choice == '4':
-        list_mps_per_party(constituencies)  # Call the new function to list MPs
+        list_mps_per_party(constituencies)
         last_action = '4'
     elif choice == '5':
         print("List of Parties:", parties)
@@ -146,7 +146,7 @@ while True:
         if not found_region:
             print("No constituencies found in that region.")
         last_action = '6'
-    elif choice == '7':
+    elif choice == '7': # Option 1-7 calling functions based on user input
         constituency_name = input("Enter the constituency name: ")
         found = False
         for con in constituencies:
@@ -163,7 +163,7 @@ while True:
             print("Constituency not found.")
         last_action = '7'
     elif choice == '8':  # Option to exit program
-        print("Thank you for using my software, goodbye👋!!!")
+        print("Thank you for using my software, goodbye!!!")
         break
     else:
         print("Invalid option. Please enter a valid option and try again.")
@@ -213,4 +213,19 @@ while True:
                     print("Constituency not found.")  # Option 1-7 repeats the last valid action if invalid input is given
         else:
             print("Invalid input. Returning to main menu.")
+csvfile.close() # Gets rid of end error message
 # Loop restarts for the main menu
+
+# refrences
+# https://realpython.com/python-csv/
+#https://realpython.com/videos/reading-csvs-pythons-csv-module/
+#https://now.ntu.ac.uk/d2l/le/content/1046185/viewContent/13287022/View
+#https://realpython.com/python3-object-oriented-programming/
+#https://now.ntu.ac.uk/d2l/le/content/1046185/viewContent/13314606/View
+#https://www.youtube.com/watch?v=ZDa-Z5JzLYM
+#https://www.w3schools.com/python/python_functions.asp
+#https://www.youtube.com/watch?v=9Os0o3wzS_I
+#https://realpython.com/primer-on-python-decorators/
+#https://olympus.ntu.ac.uk/CMP3BLANCP/OneLastTime/blob/4b9dbbe96e16550a2a65cce99e3c5b0de0058809/MyPythonProject.py
+#https://www.youtube.com/watch?v=6iF8Xb7Z3wQ
+#ttps://realpython.com/python-debugging-pdb/
