@@ -1,4 +1,5 @@
 import csv
+import time # this is for my fake loading screen im testing
 # The csv module is imported to read data from the CSV file.
 class Constituency:
     def __init__(self, t):
