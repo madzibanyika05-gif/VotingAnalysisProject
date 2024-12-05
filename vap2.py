@@ -158,7 +158,7 @@ while True:
         if retry_or_menu == 'M':
             continue   # Loop restarts for the main menu
         elif retry_or_menu == 'Y':
-            
+
             if last_action == '1':
                 analyze_valid_voters_per_party(constituencies) # Based on the last valid action, repeat that action
             elif last_action == '2':
