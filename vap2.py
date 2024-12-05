@@ -38,6 +38,24 @@ def analyze_valid_voters_per_party(constituencies):
 def calculate_gender_percentages(constituencies):
     total_male = 0
     total_female = 0
+
+def add_mps_party(constituencies, party_name): #part_name is the list "parties" on line 81
+    mp_count_dict = {"Lab":0, "Con":0, "LD":0, "RUK":0, "Green":0, "IND":0, "SNP":0, "PC":0, "DUP":0, "SF":0, "SDLP":0, "UUP":0, "APNI":0}
+    number_of_mps = 0
+    for x in constituencies:
+        for y in constituency['CName']:
+            if y in party_name:
+                number_of_mps += 1
+        mp_count_dict[y] = number_of_mps
+        print(y , " " , mp_count_dict[y])
+        number_of_mps = 0
+
+    #if party_name in mp_count_dict:
+        #if isinstance(number_of_mps, int) and number_of_mps >= 0:
+            #mp_count_dict[party_name] += number_of_mps
+
+
+
     
 # Count number of males and females
     for con in constituencies:
@@ -71,6 +89,7 @@ options = [
 constituencies = []
 parties = ["Lab", "Con", "LD", "RUK", "Green", "IND", "SNP", "PC", "DUP", "SF", "SDLP", "UUP", "APNI"]
 mpCount = [0] * len(parties)
+print(mpCount)
 
 # Update the file path as necessary
 with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/EditedData.csv', newline='') as csvfile:
@@ -116,10 +135,19 @@ while True:
         calculate_gender_percentages(constituencies)
         last_action = '3'
     elif choice == '4':
+        add_mps_party(constituencies, parties)
         counter1 = 0
         for party in parties:
-            print(party, " got ", mpCount[counter1], " mps")
+            if row ['First party']. lower() == party.lower():
+                mpCount[counter1] += 1
             counter1 += 1
+            print(mpCount)
+            #or party in parties:
+                #print(party, " got ", mpCount[counter1], " mps")
+            plt.bar(parties, mpCount) # Counter for number of mps per party
+            plt.show()
+            plt.pie(mpCoun)
+            plt.show()
         last_action = '4'
     elif choice == '5':
         print("List of Parties:", parties)
