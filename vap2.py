@@ -89,6 +89,10 @@ with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/Edit
         constituencies.append(con)
 # CSV is read and extracts into a rows 
 
+print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. Have fun!🤗")
+input("Please press the enter key on your device to continue...")
+# Welcome message and user input to continue
+
 while True:
     # Main Menu Title
     print("\n--- Main Menu ---")
