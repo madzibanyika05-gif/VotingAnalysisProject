@@ -64,6 +64,7 @@ options = [
     "List the parties",
     "List constituencies by region",
     "List constituency details"
+    "Exit" # Exit option to terminate the program
 ]
 #List defines all options a user can choose from the program
 
@@ -89,7 +90,7 @@ with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/Edit
         constituencies.append(con)
 # CSV is read and extracts into a rows 
 
-print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. Have fun!🤗")
+print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. To terminate software, return to main menu and choose option 8. Have fun!🤗")
 input("Please press the enter key on your device to continue...")
 # Welcome message and user input to continue
 
@@ -151,8 +152,10 @@ while True:
         if not found:
             print("Constituency not found.")
         last_action = '7'
+    elif choice == '8': # opiton 8 to exit program
+        print("Thank you for using my software, goodbye👋!!!")
     else:
-        print("Invalid option. Please try again.")
+        print("Invalid option. Please enter a valid option and try again.")
         last_action = None  # No valid action taken
 # Option 7 checks for input and asks for constituency name and prints details
 
