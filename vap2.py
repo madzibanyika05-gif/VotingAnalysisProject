@@ -1,9 +1,9 @@
 import csv
-
+# The csv module is imported to read data from the CSV file.
 class Constituency:
     def __init__(self, t):
         self.details = t 
-# Class to rperresnt one constituency with its details
+# Class to represent one constituency with its details
 
     def __str__(self):
         return self.details['CName'] + " - " + self.details['Party'] + " (" + self.details['RName'] + ")"
@@ -32,40 +32,23 @@ def analyze_valid_voters_per_party(constituencies):
             party_valid_votes[party] = 0
         party_valid_votes[party] += valid_votes
 
-    #Print results
+    # Print results
     for party, votes in party_valid_votes.items():
-        print(f"{party}: {votes} valid votes") # Function counts number of valid votes per party
+        print(f"{party}: {votes} valid votes")  # Function counts number of valid votes per party
+
 def calculate_gender_percentages(constituencies):
     total_male = 0
     total_female = 0
-
-def add_mps_party(constituencies, party_name): #part_name is the list "parties" on line 81
-    mp_count_dict = {"Lab":0, "Con":0, "LD":0, "RUK":0, "Green":0, "IND":0, "SNP":0, "PC":0, "DUP":0, "SF":0, "SDLP":0, "UUP":0, "APNI":0}
-    number_of_mps = 0
-    for x in constituencies:
-        for y in constituency['CName']:
-            if y in party_name:
-                number_of_mps += 1
-        mp_count_dict[y] = number_of_mps
-        print(y , " " , mp_count_dict[y])
-        number_of_mps = 0
-
-    #if party_name in mp_count_dict:
-        #if isinstance(number_of_mps, int) and number_of_mps >= 0:
-            #mp_count_dict[party_name] += number_of_mps
-
-
-
     
-# Count number of males and females
+    # Count number of males and females
     for con in constituencies:
-        gender = con.GetMemberGender() # Retrieves the gender from the Member Gender column
+        gender = con.GetMemberGender()  # Retrieves the gender from the Member Gender column
         if gender == "Male":
             total_male += 1
         elif gender == "Female":
             total_female += 1
 
-    total_members = total_male + total_female # Total number of counted genders
+    total_members = total_male + total_female  # Total number of counted genders
     if total_members > 0:
         male_percentage = (total_male / total_members) * 100
         female_percentage = (total_female / total_members) * 100
@@ -74,22 +57,35 @@ def add_mps_party(constituencies, party_name): #part_name is the list "parties" 
     else:
         print("No member data available to calculate percentages.")
 
+def list_mps_per_party(constituencies):
+    """Function to count and display the number of MPs for each party."""
+    mp_count_dict = {party: 0 for party in parties}  # Initialize party counts
+
+    for con in constituencies:
+        party = con.details['Party']
+        if party in mp_count_dict:
+            mp_count_dict[party] += 1  # Increment count for that party
+
+    # Print the number of MPs for each party
+    print("\nNumber of MPs in each party:")
+    for party, count in mp_count_dict.items():
+        print(f"{party}: {count} MPs")
+
 options = [
     "Analyse the number of valid voters per party",
     "List by constituency",
     "Calculate % of Male and Female Members",
-    "List the MPS",
+    "List the number of MPs per party",  # Updated description
     "List the parties",
     "List constituencies by region",
-    "List constituency details"
-    "Exit" # Exit option to terminate the program
+    "List constituency details",
+    "Exit"  # Exit option to terminate the program
 ]
-#List defines all options a user can choose from the program
+# List defines all options a user can choose from the program
 
 constituencies = []
 parties = ["Lab", "Con", "LD", "RUK", "Green", "IND", "SNP", "PC", "DUP", "SF", "SDLP", "UUP", "APNI"]
 mpCount = [0] * len(parties)
-print(mpCount)
 
 # Update the file path as necessary
 with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/EditedData.csv', newline='') as csvfile:
@@ -109,7 +105,7 @@ with open('/Users/mathewmadzibanyika/Documents/GitHub/VotingAnalysisProject/Edit
         constituencies.append(con)
 # CSV is read and extracts into a rows 
 
-print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. To terminate software, return to main menu and choose option 8. Have fun!🤗")
+print("Welcome to my voting analysis software, you can choose from a number of options to analyse and filter the 2024 UK election results. To terminate software, return to the main menu and choose option 8. Have fun!🤗")
 input("Please press the enter key on your device to continue...")
 # Welcome message and user input to continue
 
@@ -118,12 +114,11 @@ while True:
     print("\n--- Main Menu ---")
     print("Choose your option - use the number")
     print("Option Number\tOption")
-# Displays menue and asks the user to choose
     
     for index, option in enumerate(options, 1):
-        print(index, "\t", option) # Loops thorugh option list starting from 1 and displays them with their corresponding number
+        print(index, "\t", option)  # Loops through option list starting from 1 and displays them with their corresponding number
     choice = input("Enter the option number: ")
-# Choice is taken from the user via input
+    # Choice is taken from the user via input
     if choice == '1':
         analyze_valid_voters_per_party(constituencies)
         last_action = '1'
@@ -135,19 +130,7 @@ while True:
         calculate_gender_percentages(constituencies)
         last_action = '3'
     elif choice == '4':
-        add_mps_party(constituencies, parties)
-        counter1 = 0
-        for party in parties:
-            if row ['First party']. lower() == party.lower():
-                mpCount[counter1] += 1
-            counter1 += 1
-            print(mpCount)
-            #or party in parties:
-                #print(party, " got ", mpCount[counter1], " mps")
-            plt.bar(parties, mpCount) # Counter for number of mps per party
-            plt.show()
-            plt.pie(mpCoun)
-            plt.show()
+        list_mps_per_party(constituencies)  # Call the new function to list MPs
         last_action = '4'
     elif choice == '5':
         print("List of Parties:", parties)
@@ -163,7 +146,6 @@ while True:
         if not found_region:
             print("No constituencies found in that region.")
         last_action = '6'
-# Options 1-6 checking if user entered option then printing details and remebering last action
     elif choice == '7':
         constituency_name = input("Enter the constituency name: ")
         found = False
@@ -180,32 +162,28 @@ while True:
         if not found:
             print("Constituency not found.")
         last_action = '7'
-    elif choice == '8': # opiton 8 to exit program
+    elif choice == '8':  # Option to exit program
         print("Thank you for using my software, goodbye👋!!!")
+        break
     else:
         print("Invalid option. Please enter a valid option and try again.")
         last_action = None  # No valid action taken
-# Option 7 checks for input and asks for constituency name and prints details
 
-# Prompt to retry or Return to main menu
+    # Prompt to retry or Return to main menu
     if last_action is not None:
         retry_or_menu = input("Do you want to try again (Y) or return to the main menu (M)? ").strip().upper()
         if retry_or_menu == 'M':
-            continue   # Loop restarts for the main menu
+            continue  # Loop restarts for the main menu
         elif retry_or_menu == 'Y':
-
             if last_action == '1':
-                analyze_valid_voters_per_party(constituencies) # Based on the last valid action, repeat that action
+                analyze_valid_voters_per_party(constituencies)  # Based on the last valid action, repeat that action
             elif last_action == '2':
                 for con in constituencies:
                     print(con)
             elif last_action == '3':
                 calculate_gender_percentages(constituencies)  
             elif last_action == '4':
-                counter1 = 0
-                for party in parties:
-                    print(party, " got ", mpCount[counter1], " mps")
-                    counter1 += 1
+                list_mps_per_party(constituencies)
             elif last_action == '5':
                 print("List of Parties:", parties)
             elif last_action == '6':
@@ -232,7 +210,7 @@ while True:
                         print(f"Valid Votes: {con.details.get('Valid votes', 'N/A')}")
                         print(f"Majority: {con.details.get('Majority', 'N/A')}")
                 if not found:
-                    print("Constituency not found.") # Option 1-7 repeats the last valid action if invalid input is given
+                    print("Constituency not found.")  # Option 1-7 repeats the last valid action if invalid input is given
         else:
             print("Invalid input. Returning to main menu.")
 # Loop restarts for the main menu
