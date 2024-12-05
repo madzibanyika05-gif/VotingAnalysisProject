@@ -1,6 +1,5 @@
 import csv
-import time # this is for my fake loading screen im testing
-# The csv module is imported to read data from the CSV file.
+
 class Constituency:
     def __init__(self, t):
         self.details = t 
@@ -56,13 +55,6 @@ def calculate_gender_percentages(constituencies):
         print(f"Female Members: {total_female} ({female_percentage:.2f}%)")
     else:
         print("No member data available to calculate percentages.")
-    
-def fake_loading_screen():
-    print("Loading the Voting Analysis Software, please wait a moment😊...⌛")
-    for i in range(5):
-        time.sleep(100) # Fake 5 second delay
-        print(".", end="", flush=True)
-        print("\nLoading complete")
 
 options = [
     "Analyse the number of valid voters per party",
