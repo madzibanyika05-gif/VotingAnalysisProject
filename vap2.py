@@ -218,14 +218,15 @@ csvfile.close() # Gets rid of end error message
 
 # refrences
 # https://realpython.com/python-csv/
-#https://realpython.com/videos/reading-csvs-pythons-csv-module/
-#https://now.ntu.ac.uk/d2l/le/content/1046185/viewContent/13287022/View
-#https://realpython.com/python3-object-oriented-programming/
-#https://now.ntu.ac.uk/d2l/le/content/1046185/viewContent/13314606/View
-#https://www.youtube.com/watch?v=ZDa-Z5JzLYM
-#https://www.w3schools.com/python/python_functions.asp
-#https://www.youtube.com/watch?v=9Os0o3wzS_I
-#https://realpython.com/primer-on-python-decorators/
-#https://olympus.ntu.ac.uk/CMP3BLANCP/OneLastTime/blob/4b9dbbe96e16550a2a65cce99e3c5b0de0058809/MyPythonProject.py
-#https://www.youtube.com/watch?v=6iF8Xb7Z3wQ
-#ttps://realpython.com/python-debugging-pdb/
+# https://realpython.com/videos/reading-csvs-pythons-csv-module/
+# https://now.ntu.ac.uk/d2l/le/content/1046185/viewContent/13287022/View
+# https://realpython.com/python3-object-oriented-programming/
+# https://now.ntu.ac.uk/d2l/le/content/1046185/viewContent/13314606/View
+# https://www.youtube.com/watch?v=ZDa-Z5JzLYM
+# https://www.w3schools.com/python/python_functions.asp
+# https://www.youtube.com/watch?v=9Os0o3wzS_I
+# https://realpython.com/primer-on-python-decorators/
+# https://olympus.ntu.ac.uk/CMP3BLANCP/OneLastTime/blob/4b9dbbe96e16550a2a65cce99e3c5b0de0058809/MyPythonProject.py
+# https://www.youtube.com/watch?v=6iF8Xb7Z3wQ
+# https://realpython.com/python-debugging-pdb/
+# https://www.youtube.com/watch?v=6XrL5jXmTwM&t=132s
